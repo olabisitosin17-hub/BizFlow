@@ -121,3 +121,52 @@ body.app-body { background: var(--beige); margin: 0; }
   .kpi .k-value { font-size: 1.1rem; }
   .dash-head h1 { font-size: 1.3rem; }
 }
+
+/* ---------- Quick records list (scrollable, mobile-first) ---------- */
+.quick-list { display: flex; flex-direction: column; gap: 2px; max-height: 62vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.qrec { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 8px; border-top: 1px solid var(--line); cursor: pointer; border-radius: 10px; }
+.qrec:first-child { border-top: 0; }
+.qrec:hover, .qrec:active { background: var(--sky-50); }
+.qrec-main { min-width: 0; display: flex; flex-direction: column; }
+.qrec-main b { color: var(--navy); font-size: .95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qrec-main span { color: var(--muted); font-size: .8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qrec-amt { font-weight: 800; color: var(--teal-600); white-space: nowrap; }
+
+/* Back-to-home link on auth pages */
+.auth-home { position: absolute; top: 18px; left: 18px; z-index: 5; display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.14); color: #fff; padding: 8px 14px; border-radius: 999px; font-size: .86rem; font-weight: 600; }
+.auth-home:hover { background: rgba(255,255,255,.24); color:#fff; }
+@media (max-width: 860px) { .auth-home { background: rgba(255,255,255,.14); } }
+
+/* Prevent horizontal overflow */
+html, body { overflow-x: hidden; max-width: 100%; }
+
+/* ---------- Searchable pickers ---------- */
+.picker { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
+.pick { display: flex; justify-content: space-between; gap: 10px; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer; font-family: var(--sans); }
+.pick:hover, .pick:active { border-color: var(--teal); background: var(--sky-50); }
+.pick b { color: var(--navy); font-size: .92rem; }
+.pick span { color: var(--muted); font-size: .82rem; white-space: nowrap; }
+.pick-empty { color: var(--muted); font-size: .84rem; padding: 8px 4px; }
+
+/* ---------- Qty stepper ---------- */
+.qty-step { display: inline-flex; align-items: center; gap: 8px; }
+.qs-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--line); background: #fff; color: var(--navy); font-size: 1.1rem; line-height: 1; cursor: pointer; }
+.qs-btn:hover { border-color: var(--teal); background: var(--teal-100); }
+.qs-btn:disabled { opacity: .4; cursor: not-allowed; }
+.qty-step span { min-width: 24px; text-align: center; font-weight: 700; color: var(--navy); }
+
+/* ---------- Mobile table -> card list ---------- */
+@media (max-width: 640px) {
+  .table-wrap { overflow-x: visible; }
+  .tbl thead { display: none; }
+  .tbl, .tbl tbody, .tbl tr, .tbl td { display: block; width: 100%; }
+  .tbl tr { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; margin-bottom: 10px; }
+  .tbl td { border: 0; padding: 3px 0; text-align: left; font-size: .9rem; }
+  .tbl td.right { text-align: left; }
+  .tbl td:empty { display: none; }
+  .tbl .empty-row { border: 0; padding: 18px; }
+  .cart-row { grid-template-columns: 1fr auto; grid-auto-rows: min-content; row-gap: 6px; }
+  .cart-row .ci-name { grid-column: 1 / -1; }
+  .ns-totals { flex-direction: column; align-items: stretch; }
+}

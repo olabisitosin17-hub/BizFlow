@@ -93,14 +93,14 @@
     <div class="card card-pad" id="newSaleCard" style="display:none">
       <div class="card-title"><h3>New sale</h3><button class="btn btn-ghost btn-sm" id="closeNewSale">Close</button></div>
       <div class="ns-grid">
-        <div class="field"><label>Customer</label>
-          <select class="input" id="nsCustomer"><option value="">Walk-in / no customer</option></select>
+        <div class="field"><label>Customer (search name or phone)</label>
+          <input class="input" id="nsCustSearch" placeholder="Type a name or phone number…" autocomplete="off">
+          <div class="picker" id="nsCustResults"></div>
         </div>
-        <div class="field"><label>Add item (product / service)</label>
-          <select class="input" id="nsItem"><option value="">Select item…</option></select>
+        <div class="field"><label>Item (search product / service)</label>
+          <input class="input" id="nsItemSearch" placeholder="Type a product or service…" autocomplete="off">
+          <div class="picker" id="nsItemResults"></div>
         </div>
-        <div class="field"><label>Quantity</label><input class="input" id="nsQty" type="number" min="1" value="1"></div>
-        <div class="field"><label>&nbsp;</label><button class="btn btn-soft btn-block" id="nsAddItem">Add to sale</button></div>
       </div>
       <div class="cart" id="nsCart"></div>
       <div class="ns-totals">
@@ -114,15 +114,48 @@
         <select class="input" id="nsPayment"><option>Cash</option><option>Transfer</option><option>POS</option><option>Other</option></select>
       </div>
       <div class="error-text" id="nsErr"></div>
-      <button class="btn btn-primary btn-block" id="nsSave">Complete sale</button>
+      <button class="btn btn-primary btn-block" id="nsSave">Save sale</button>
     </div>
 
     <div class="card card-pad">
       <div class="card-title"><h3>Sales history</h3>
-        <div class="row"><input class="input input-sm" id="histSearch" placeholder="Search customer / ref" style="width:200px">
+        <div class="row wrap"><input class="input input-sm" id="histSearch" placeholder="Search customer / ref" style="width:200px">
         <input class="input input-sm" id="histFrom" type="date"></div>
       </div>
       <div class="table-wrap"><table class="tbl" id="histTable"><thead><tr><th>Ref</th><th>Customer</th><th>Date</th><th class="right">Amount</th><th></th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- Receipt modal -->
+  <dialog class="dlg" id="receiptDialog">
+    <div class="dlg-body">
+      <button class="dlg-close" id="closeReceipt" aria-label="Close">✕</button>
+      <h3 style="margin-bottom:12px">Sale complete</h3>
+      <div id="receiptBody"></div>
+      <div class="row" style="gap:10px;margin-top:16px">
+        <button class="btn btn-primary btn-block" id="receiptPrint">🖨️ Print / Save PDF</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- QUICK ACTIONS: registered records + create -->
+  <section class="tab-panel hidden" id="tab-quick">
+    <div class="dash-head">
+      <div><h1>Quick Actions</h1><p class="muted">Your registered customers, products, services and expenses.</p></div>
+      <button class="btn btn-primary" id="quickNewBtn">＋ New record</button>
+    </div>
+    <div class="seg" id="quickSeg">
+      <button class="seg-btn active" data-qk="customers">Customers</button>
+      <button class="seg-btn" data-qk="products">Products</button>
+      <button class="seg-btn" data-qk="services">Services</button>
+      <button class="seg-btn" data-qk="expenses">Expenses</button>
+    </div>
+    <div class="card card-pad">
+      <div class="row between" style="margin-bottom:12px">
+        <input class="input input-sm" id="quickSearch" placeholder="Search…" style="max-width:320px">
+        <span class="badge" id="quickCount">0</span>
+      </div>
+      <div class="quick-list" id="quickList"><p class="muted">Loading…</p></div>
     </div>
   </section>
 
