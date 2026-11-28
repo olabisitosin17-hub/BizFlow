@@ -81,6 +81,12 @@ async function withContext(code, app, needClient, fn) {
 
 async function call({ code, app, fn, args }) {
   app = String(app || '').toLowerCase();
+
+  // Cross-app read-only dashboard (aggregates every enabled app for this business code).
+  if (fn === 'getDashboard') {
+    return require('./dashboard').getDashboard(String(code || ''), (args && args[0]) || {});
+  }
+
   const table = ACTIONS[app];
   if (!table || !Object.prototype.hasOwnProperty.call(table, fn)) {
     throw new Error('Unknown action: ' + fn);
