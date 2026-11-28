@@ -160,8 +160,8 @@ const DEFAULT_EXPENSE_CATEGORIES = ['Fuel', 'Transport', 'Rent', 'Electricity / 
 // Seed starter categories the first time a business has none (mirrors getCategoriesSheet_()):
 // expense defaults + any product categories already typed on products.
 async function ensureCategories(client, bizId) {
-  const count = await client.query('SELECT COUNT(*)::int AS n FROM sales_categories WHERE business_id = $1', [bizId]);
-  if (count.rows[0].n > 0) return;
+  const existing = await client.query('SELECT id FROM sales_categories WHERE business_id = $1 LIMIT 1', [bizId]);
+  if (existing.rows.length > 0) return;
   const seen = {};
   const rows = [];
   const prods = await client.query('SELECT DISTINCT category FROM sales_products WHERE business_id = $1', [bizId]);

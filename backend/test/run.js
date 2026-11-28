@@ -195,22 +195,54 @@ async function test(name, fn) {
     const st = await query('SELECT status FROM accounts WHERE id = $1', [acc.id]);
     assert.equal(st.rows[0].status, 'ACTIVE');
 
-    const biz = await query('SELECT code, app FROM businesses WHERE account_id = $1 ORDER BY app', [acc.id]);
+    const account = await query('SELECT business_code FROM accounts WHERE id = $1', [acc.id]);
+    const businessCode = account.rows[0].business_code;
+    const biz = await query('SELECT code, app, account_id FROM businesses WHERE account_id = $1 ORDER BY app', [businessCode]);
     assert.equal(biz.rows.length, 2);                          // BOTH -> SALES + SERVICES
     assert.ok(biz.rows[0].code && biz.rows[0].code === biz.rows[1].code);   // same code
+    assert.ok(biz.rows.every(row => row.account_id === businessCode));
 
     const login = await onboarding.login({ email: EMAIL, password: PASSWORD });
     assert.ok(login.session && login.code);
-    assert.deepEqual(login.apps.sort(), ['sales', 'services']);
+    assert.deepEqual(login.apps, ['sales', 'services']);
 
     // Session resolves to the same code (used to scope /api/call)
     const sess = await onboarding.sessionFor(login.session);
     assert.equal(sess.code, login.code);
 
+    // Login app access follows the selected version in the account record.
+    await query("UPDATE accounts SET app_version = 'SALES' WHERE id = $1", [acc.id]);
+    const salesOnlyLogin = await onboarding.login({ email: EMAIL, password: PASSWORD });
+    assert.deepEqual(salesOnlyLogin.apps, ['sales']);
+    assert.deepEqual((await onboarding.sessionFor(login.session)).apps, ['sales']);
+
     // The provisioned Sales workspace works and is independent
     const code = login.code;
     const list = await core.call({ code, app: 'sales', fn: 'getProductsList', args: [] });
     assert.ok(Array.isArray(list));
+  });
+  await test('login links orphaned workspaces and provisions when none match', async () => {
+    const acc = (await query('SELECT id, business_code FROM accounts WHERE lower(email)=lower($1)', [EMAIL])).rows[0];
+    await query('DELETE FROM businesses WHERE account_id = $1', [acc.business_code]);
+    await query('UPDATE accounts SET business_code = NULL WHERE id = $1', [acc.id]);
+    await query(
+      'INSERT INTO businesses (code, name, app, active, account_id) VALUES ($1,$2,$3,$4,$5)',
+      ['ORPHAN-' + CODE, 'Onboard Co', 'SALES', true, null]
+    );
+
+    const recovered = await onboarding.login({ email: EMAIL, password: PASSWORD });
+    assert.equal(recovered.code, 'ORPHAN-' + CODE);
+    assert.deepEqual(recovered.apps, ['sales']);
+
+    const linked = await query('SELECT app, account_id FROM businesses WHERE account_id = $1 AND active = TRUE', [recovered.code]);
+    assert.deepEqual(linked.rows.map(row => row.app), ['SALES']);
+    assert.ok(linked.rows.every(row => row.account_id === recovered.code));
+
+    await query('DELETE FROM businesses WHERE account_id = $1', [recovered.code]);
+    await query('UPDATE accounts SET business_code = NULL WHERE id = $1', [acc.id]);
+    const provisioned = await onboarding.login({ email: EMAIL, password: PASSWORD });
+    assert.ok(provisioned.code);
+    assert.deepEqual(provisioned.apps, ['sales']);
   });
   await test('wrong password and unknown email give the same generic error', async () => {
     await assert.rejects(onboarding.login({ email: EMAIL, password: 'wrongwrong' }), /Incorrect email or password/);
@@ -230,6 +262,18 @@ async function test(name, fn) {
     const relog = await onboarding.login({ email: EMAIL, password: 'brand new pass' });
     assert.ok(relog.session);
   });
+  await test('login rejects accounts without an active application workspace', async () => {
+    const acc = (await query('SELECT id, business_code FROM accounts WHERE lower(email)=lower($1)', [EMAIL])).rows[0];
+    await query('DELETE FROM businesses WHERE account_id = $1', [acc.business_code]);
+    await query(
+      'INSERT INTO businesses (code, name, app, active, account_id) VALUES ($1,$2,$3,$4,$5)',
+      [acc.business_code, 'Onboard Co', 'SALES', false, acc.business_code]
+    );
+    await assert.rejects(
+      onboarding.login({ email: EMAIL, password: 'brand new pass' }),
+      /No active application workspace is linked/
+    );
+  });
 
   console.log('\n' + passed + ' passed' + (failures.length ? ', ' + failures.length + ' FAILED' : '') + ' (code ' + CODE + ')');
 
@@ -237,9 +281,9 @@ async function test(name, fn) {
   try {
     await query('DELETE FROM businesses WHERE code = $1', [CODE]);
     // Delete any onboarding businesses (they use generated codes) linked to the test email's account.
-    const accs = await query('SELECT id FROM accounts WHERE lower(email) = lower($1)', [EMAIL]);
+    const accs = await query('SELECT id, business_code FROM accounts WHERE lower(email) = lower($1)', [EMAIL]);
     for (const a of accs.rows) {
-      await query('DELETE FROM businesses WHERE account_id = $1', [a.id]);
+      if (a.business_code) await query('DELETE FROM businesses WHERE account_id = $1', [a.business_code]);
       await query('DELETE FROM accounts WHERE id = $1', [a.id]);
     }
   } catch (e) {}

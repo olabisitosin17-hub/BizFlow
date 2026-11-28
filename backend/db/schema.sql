@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS accounts (
   email         TEXT        NOT NULL,
   password_hash TEXT        NOT NULL,
   business_name TEXT        NOT NULL,
+  business_code TEXT,
   app_version   TEXT        NOT NULL,                -- SALES | SVC | BOTH
   status        TEXT        NOT NULL DEFAULT 'PENDING', -- PENDING | ACTIVE
   created_at    TIMESTAMPTZ   NOT NULL DEFAULT now(),
@@ -18,6 +19,7 @@ CREATE TABLE IF NOT EXISTS accounts (
   CHECK (status IN ('PENDING', 'ACTIVE'))
 );
 CREATE UNIQUE INDEX IF NOT EXISTS uq_accounts_email ON accounts (lower(email));
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS business_code TEXT;
 
 -- ---------------------------------------------------------------
 -- Email verification tokens (hashed, single-use, expiring).
@@ -69,13 +71,33 @@ CREATE TABLE IF NOT EXISTS businesses (
   app           TEXT        NOT NULL DEFAULT 'SALES',  -- SALES | SERVICES
   active        BOOLEAN     NOT NULL DEFAULT TRUE,
   created_at    TIMESTAMPTZ   NOT NULL DEFAULT now(),
-  account_id    BIGINT      REFERENCES accounts(id) ON DELETE CASCADE,
+  account_id    TEXT,                                  -- matches accounts.business_code
   CHECK (app IN ('SALES', 'SERVICES')),
   UNIQUE (code, app)
 );
 
+-- Move legacy numeric account references to the account's business code.
+ALTER TABLE businesses DROP CONSTRAINT IF EXISTS businesses_account_id_fkey;
+ALTER TABLE businesses ALTER COLUMN account_id TYPE TEXT USING account_id::text;
+UPDATE accounts a
+SET business_code = linked.code
+FROM (
+  SELECT account_id, MIN(code) AS code
+  FROM businesses
+  WHERE account_id IS NOT NULL AND account_id ~ '^[0-9]+$'
+  GROUP BY account_id
+  HAVING COUNT(DISTINCT code) = 1
+) linked
+WHERE a.id::text = linked.account_id AND a.business_code IS NULL;
+UPDATE businesses b
+SET account_id = a.business_code
+FROM accounts a
+WHERE b.account_id = a.id::text AND a.business_code IS NOT NULL;
+CREATE UNIQUE INDEX IF NOT EXISTS uq_accounts_business_code ON accounts (business_code);
+
 CREATE INDEX IF NOT EXISTS idx_businesses_code ON businesses (code);
 CREATE INDEX IF NOT EXISTS idx_businesses_active ON businesses (active);
+CREATE INDEX IF NOT EXISTS idx_businesses_account_id ON businesses (account_id);
 
 -- ---------------------------------------------------------------
 -- SALES app tables

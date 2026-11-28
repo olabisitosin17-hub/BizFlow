@@ -184,4 +184,6 @@
         showSession();
       })
       .catch(function (e) { SERVER_ERROR = (e && e.message) || 'Cannot reach the server.'; showSession(); });
+  } else if (params.has('pick')) {
+    openLogin('No active application workspace is linked to this account. Please log in again or contact support.');
   }
