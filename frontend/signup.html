@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Create your workspace — Bizinflow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/public.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#2F4156"/><path d="M6 18c4-6 7 6 11 0s7 6 11 0" fill="none" stroke="#C8D9E6" stroke-width="3" stroke-linecap="round"/></symbol></svg>
+
+<div class="auth">
+  <aside class="auth-side">
+    <span class="side-deco a"></span><span class="side-deco b"></span>
+    <a class="brand" href="/"><svg viewBox="0 0 32 32" style="width:34px;height:34px" aria-hidden="true"><use href="#i-logo"/></svg><span>Bizinflow</span></a>
+    <div class="side-body">
+      <h1>Start your business journey.</h1>
+      <p>Create your workspace in under a minute and choose the modules that fit your business.</p>
+      <ul class="side-points">
+        <li><span class="tick">✓</span> Pick Sales, Services or both</li>
+        <li><span class="tick">✓</span> Your own private workspace</li>
+        <li><span class="tick">✓</span> Records, receipts and reports built in</li>
+      </ul>
+    </div>
+    <small style="color:#A9BFCE">© <span id="yr"></span> Bizinflow</small>
+  </aside>
+
+  <main class="auth-form-wrap">
+    <div class="auth-card">
+      <h2>Create your workspace</h2>
+      <p class="sub">Tell us about your business to get started.</p>
+
+      <form id="signupForm" novalidate>
+        <div class="field">
+          <label for="bizName">Business name</label>
+          <input class="input" id="bizName" type="text" placeholder="e.g. Ada's Boutique" autocomplete="organization" required>
+        </div>
+        <div class="field">
+          <label for="email">Business email address</label>
+          <input class="input" id="email" type="email" placeholder="you@business.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input-group">
+            <input class="input" id="password" type="password" placeholder="Min. 8 characters" autocomplete="new-password" required>
+            <button type="button" class="trailing" data-toggle="password">Show</button>
+          </div>
+        </div>
+
+        <label class="field" style="font-weight:600;color:var(--navy);margin-bottom:6px">Select application version</label>
+        <div class="version-cards" id="versionCards">
+          <label class="vcard" data-v="SALES">
+            <input type="radio" name="version" value="SALES">
+            <div class="vhead"><span class="vico">🛒</span><span class="radio"></span></div>
+            <h4>Sales Management</h4>
+            <p>Sales recording, product management, inventory &amp; receipts.</p>
+          </label>
+          <label class="vcard" data-v="SVC">
+            <input type="radio" name="version" value="SVC">
+            <div class="vhead"><span class="vico">🛠️</span><span class="radio"></span></div>
+            <h4>Service Management</h4>
+            <p>Service recording, customer history &amp; expense tracking.</p>
+          </label>
+          <label class="vcard" data-v="BOTH">
+            <input type="radio" name="version" value="BOTH">
+            <div class="vhead"><span class="vico">🧩</span><span class="reco">Recommended</span><span class="radio"></span></div>
+            <h4>Complete Business Suite</h4>
+            <p>Both Sales and Services with a unified dashboard.</p>
+          </label>
+        </div>
+
+        <div class="error-text" id="err" role="alert"></div>
+        <button class="btn btn-primary btn-block" type="submit" id="submitBtn">Create My Workspace</button>
+      </form>
+
+      <p class="auth-foot">By continuing you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</p>
+      <p class="auth-foot">Already have an account? <a href="login.html">Sign in</a></p>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/pages/signup.js"></script>
+</body>
+</html>

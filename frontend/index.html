@@ -3,278 +3,192 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Soft Manager – Sales, receipts and customers for your business</title>
-<link rel="stylesheet" href="css/home.css">
+<title>Bizinflow — Manage Your Business Smarter</title>
+<meta name="description" content="Sales, Services and Inventory — all in one place. Simplify operations, track performance and grow your business with Bizinflow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/public.css">
 <script>if (/[?&]b=[^&]+/.test(location.search)) document.documentElement.classList.add("pending");</script>
 </head>
-<body>
+<body class="landing">
 
-<!-- reusable icons -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#2F4156"/><path d="M6 18c4-6 7 6 11 0s7 6 11 0" fill="none" stroke="#C8D9E6" stroke-width="3" stroke-linecap="round"/></symbol>
 </svg>
 
-<nav aria-label="Main">
+<header class="site-nav" id="siteNav">
   <div class="wrap nav-in">
-    <a class="logo" href="#home" aria-label="Home">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#567C8D"/><path d="M5 17c4-6 7 6 11 0s7 6 11 0" fill="none" stroke="#C8D9E6" stroke-width="3" stroke-linecap="round"/></svg>
-      <span data-app-name>Soft Manager</span>
+    <a class="brand" href="/">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#i-logo"/></svg>
+      <span>Bizinflow</span>
     </a>
-    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="links">
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-ghost btn-sm" href="login.html">Login</a>
+      <a class="btn btn-primary btn-sm" href="signup.html">Sign Up</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <div class="links" id="links">
-      <a href="#home" data-nav="home">Home</a>
-      <a href="#features" data-nav="features">Features</a>
-      <a href="#about" data-nav="about">About</a>
-      <a href="#contact" data-nav="contact">Contact</a>
-      <a class="btn btn-ghost" data-login href="#">Log in</a>
-      <a class="btn btn-teal btn-sm" data-signup href="#">Sign up</a>
-      <a class="btn btn-ghost" id="navOut" href="#">Sign out</a>
-    </div>
   </div>
-</nav>
+</header>
 
 <main>
-<section class="chooser" id="chooser">
-  <div class="wrap">
-    <div class="card">
-      <h2 id="welcome">Welcome</h2>
-      <p class="sub">Choose where you want to go.</p>
-      <div id="appLinks"></div>
-    </div>
-  </div>
-  <svg class="wave" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 60 C240 120 480 0 720 50 S1200 120 1440 40 V140 H0Z" fill="#C8D9E6" opacity=".55"/>
-    <path d="M0 90 C260 40 520 130 780 85 S1220 40 1440 90 V140 H0Z" fill="#C8D9E6"/>
-    <path d="M0 120 C300 90 600 140 900 115 S1300 100 1440 118 V140 H0Z" fill="#2F4156"/>
-  </svg>
-</section>
-<section class="hero" id="home">
-  <div class="wrap hero-grid">
-    <div>
-      <h1>Sales, Receipts and Customers. One Seamless Flow.</h1>
-      <p class="lead">Welcome to <span data-app-name>Soft Manager</span>, the smarter way to run your business. Record sales, print receipts and keep every customer in one simple app that works right from your phone.</p>
-      <div class="btns">
-        <a class="btn btn-teal" data-login href="#">Get Started</a>
-        <a class="btn btn-white" href="#features">Explore Features</a>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <svg class="leaf leaf-1" viewBox="0 0 200 200" aria-hidden="true"><path d="M100 10C40 40 40 140 100 190C160 140 160 40 100 10Z" fill="#C8D9E6" opacity=".5"/></svg>
+    <svg class="leaf leaf-2" viewBox="0 0 200 200" aria-hidden="true"><path d="M100 10C40 40 40 140 100 190C160 140 160 40 100 10Z" fill="#567C8D" opacity=".18"/></svg>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="label">Smart Business Management Platform</span>
+        <h1>Manage Your Business Smarter with Bizinflow.</h1>
+        <p class="lead">Sales, Services and Inventory — all in one place. Simplify your operations, track performance and grow your business with ease.</p>
+        <div class="hero-btns">
+          <a class="btn btn-primary" href="signup.html">Get Started</a>
+          <a class="btn btn-ghost" href="#features">Learn More</a>
+        </div>
+        <div class="trust">
+          <span class="badge teal">Sales</span>
+          <span class="badge teal">Services</span>
+          <span class="badge teal">Inventory</span>
+          <span class="badge teal">Reports</span>
+        </div>
       </div>
-    </div>
-    <div class="dash" aria-label="Dashboard preview">
-      <div class="dash-top">
-        <div><small>Today’s sales</small><div class="big">₦48,500</div></div>
-        <span class="pill">+12% vs yesterday</span>
-      </div>
-      <svg class="chart" viewBox="0 0 300 90" role="img" aria-label="Sales through the day">
-        <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#567C8D" stop-opacity=".45"/><stop offset="1" stop-color="#C8D9E6" stop-opacity=".1"/></linearGradient></defs>
-        <path d="M0 70 C30 60 45 40 75 48 S125 78 155 50 S210 14 240 30 S285 20 300 12 V90 H0Z" fill="url(#g)"/>
-        <path d="M0 70 C30 60 45 40 75 48 S125 78 155 50 S210 14 240 30 S285 20 300 12" fill="none" stroke="#567C8D" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-      <div class="counts">
-        <div><b>43</b>Sales</div>
-        <div><b>43</b>Receipts</div>
-        <div><b>6</b>Expenses</div>
-      </div>
-      <div class="entry"><span>REC0042 · Consultation, 2 products</span><span>₦6,500</span></div>
-      <div class="entry"><span>SLS0043 · Bulk order (10% off)</span><span>₦9,000</span></div>
-    </div>
-  </div>
-  <svg class="wave" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 60 C240 120 480 0 720 50 S1200 120 1440 40 V140 H0Z" fill="#C8D9E6" opacity=".55"/>
-    <path d="M0 90 C260 40 520 130 780 85 S1220 40 1440 90 V140 H0Z" fill="#C8D9E6"/>
-    <path d="M0 120 C300 90 600 140 900 115 S1300 100 1440 118 V140 H0Z" fill="#fff"/>
-  </svg>
-</section>
 
-<section class="feat pad" id="features">
-  <div class="wrap">
-    <div class="head">
-      <h2>Everything Flows Better with <span data-app-name>Soft Manager</span></h2>
-      <p>Everything your counter needs, working together so nothing falls between the cracks.</p>
-    </div>
-    <div class="grid3">
-      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 5h2l2 11h11l2-8H6"/><circle cx="9" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg></div><h3>Daily sales entry</h3><p>Add several services to one sale in seconds. Every sale gets its own ID, like SLS0001.</p></article>
-      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M7 9V3h10v6M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="7" y="14" width="10" height="7" rx="1"/></svg></div><h3>Receipt printing and storage</h3><p>Print a clean receipt for every sale and find any past receipt again.</p></article>
-      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .7 3.5 2.6 3.5 5.5"/></svg></div><h3>Customer records</h3><p>Search by name or phone number. Each phone number belongs to one customer, so there are no duplicates.</p></article>
-      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7l12-4v4M17 14h2"/></svg></div><h3>Expense tracking</h3><p>Log general expenses as they happen and see what the shop spends alongside what it earns.</p></article>
-      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div><h3>Editable services</h3><p>Add services or change prices inside the app, with no spreadsheet editing.</p></article>
-      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></div><h3>Percentage discounts</h3><p>Enter a discount as a percentage and the total and receipt update automatically.</p></article>
-    </div>
-  </div>
-</section>
-
-<section class="about pad" id="about">
-  <div class="wrap about-grid">
-    <div>
-      <h2>Designed to Make Your Life Easier</h2>
-      <p class="lead"><span data-app-name>Soft Manager</span> brings simplicity, organisation and efficiency together in one seamless experience. Our goal is to provide an intuitive platform that helps users achieve more with less effort.</p>
-      <ul class="checks">
-        <li><svg viewBox="0 0 24 24"><use href="#i-check"/></svg><span>Every record has its own ID: CUS0001, REC0001, SLS0001</span></li>
-        <li><svg viewBox="0 0 24 24"><use href="#i-check"/></svg><span>Made for your phone, with your data kept in Google Sheets</span></li>
-        <li><svg viewBox="0 0 24 24"><use href="#i-check"/></svg><span>Simple enough for any attendant to learn in minutes</span></li>
-      </ul>
-    </div>
-    <div class="panel" aria-label="Examples of records">
-      <div class="mini"><small>Sale</small><b>SLS0043</b><span>Bulk order, 10% off</span></div>
-      <div class="mini"><small>Customer</small><b>CUS0017</b><span>Found by phone number</span></div>
-      <div class="mini"><small>Receipt</small><b>REC0043</b><span>Printed and saved</span></div>
-      <svg class="wave" viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 40 C60 10 120 70 200 40 S340 10 400 40 V80 H0Z" fill="#fff" opacity=".6"/>
-        <path d="M0 58 C80 35 150 80 230 58 S350 40 400 60 V80 H0Z" fill="#567C8D" opacity=".35"/>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<section class="steps pad" id="how">
-  <div class="wrap">
-    <div class="head">
-      <h2>From Counter to Receipt in Three Steps</h2>
-      <p>Set up once, then every sale follows the same quick routine.</p>
-    </div>
-    <div class="stepgrid">
-      <div class="step"><div class="num">1</div><h3>Add Your Services</h3><p>List what you offer and set your prices. Change them anytime.</p></div>
-      <div class="step"><div class="num">2</div><h3>Record a Sale</h3><p>Find or add the customer, pick the services and apply any discount.</p></div>
-      <div class="step"><div class="num">3</div><h3>Print the Receipt</h3><p>Hand over a clear receipt. A copy is stored for you automatically.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="contact pad" id="contact">
-  <div class="wrap">
-    <div class="head">
-      <h2>Get in Touch</h2>
-      <p>Questions, or ready to set up your business? Reach us and we will get back to you.</p>
-    </div>
-    <div class="contact-cards" id="contactCards"></div>
-    <p class="none" id="contactNone">Ask the person who set up your account for help, or log in with your PIN to get started.</p>
-  </div>
-</section>
-
-<section class="cta" id="start">
-  <div class="wrap">
-    <h2>Ready to Experience a Better Flow?</h2>
-    <p>Join <span data-app-name>Soft Manager</span> today and run your business with less paperwork.</p>
-    <a class="btn btn-teal" data-signup href="#">Get Started Today</a>
-  </div>
-  <svg class="wave" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 70 C260 130 520 10 800 60 S1260 120 1440 50 V140 H0Z" fill="#C8D9E6" opacity=".35"/>
-    <path d="M0 100 C280 50 560 130 840 95 S1260 60 1440 100 V140 H0Z" fill="#C8D9E6" opacity=".7"/>
-    <path d="M0 125 C320 100 620 140 940 120 S1300 108 1440 124 V140 H0Z" fill="#2F4156"/>
-  </svg>
-</section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div class="foot">
-      <div>
-        <a class="logo" href="#home">
-          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#567C8D"/><path d="M5 17c4-6 7 6 11 0s7 6 11 0" fill="none" stroke="#C8D9E6" stroke-width="3" stroke-linecap="round"/></svg>
-          <span data-app-name>Soft Manager</span>
-        </a>
-        <p>One seamless place to manage sales, receipts, customers and expenses.</p>
-      </div>
-      <div><h4>Quick links</h4><ul><li><a href="#home">Home</a></li><li><a href="#features">Features</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
-      <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
-      <div><h4>Follow us</h4>
-        <div class="social">
-          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
-          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg></a>
-          <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
+      <div class="hero-mock" aria-label="Dashboard preview">
+        <div class="laptop">
+          <div class="laptop-screen">
+            <div class="mock-top">
+              <div><small>Total revenue</small><div class="big">₦248,500</div></div>
+              <span class="pill up">▲ 12.4%</span>
+            </div>
+            <div class="mock-stats">
+              <div class="ms"><small>Expenses</small><b>₦91,200</b></div>
+              <div class="ms"><small>Net profit</small><b>₦157,300</b></div>
+              <div class="ms"><small>Customers</small><b>184</b></div>
+            </div>
+            <div class="mock-chart">
+              <svg viewBox="0 0 320 90" preserveAspectRatio="none" aria-hidden="true">
+                <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#567C8D" stop-opacity=".38"/><stop offset="1" stop-color="#C8D9E6" stop-opacity=".06"/></linearGradient></defs>
+                <path d="M0 68 C40 58 60 34 95 44 S150 74 185 46 S245 12 285 26 S315 16 320 10 V90 H0Z" fill="url(#g1)"/>
+                <path d="M0 68 C40 58 60 34 95 44 S150 74 185 46 S245 12 285 26 S315 16 320 10" fill="none" stroke="#567C8D" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="mock-rows">
+              <div class="mrow"><span>SLS0043 · Bulk order</span><span>₦9,000</span></div>
+              <div class="mrow"><span>REC0042 · Consultation</span><span>₦6,500</span></div>
+              <div class="mrow"><span>CUS0017 · Ada</span><span>₦12,400</span></div>
+            </div>
+          </div>
+          <div class="laptop-base"></div>
         </div>
       </div>
     </div>
-    <div class="copy">© 2026 <span data-app-name>Soft Manager</span>. All rights reserved.</div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="pad feat" id="features">
+    <div class="wrap">
+      <div class="head center">
+        <h2>Everything your business needs, in one flow</h2>
+        <p>One platform for sales, services, stock, customers and the numbers that matter.</p>
+      </div>
+      <div class="grid feat-grid">
+        <article class="card card-pad"><div class="ico">🛒</div><h3>Sales Management</h3><p>Record sales fast, apply discounts and print receipts.</p></article>
+        <article class="card card-pad"><div class="ico">🛠️</div><h3>Service Management</h3><p>Book services, track history and manage customers.</p></article>
+        <article class="card card-pad"><div class="ico">📦</div><h3>Inventory Management</h3><p>Know your stock, cost price and selling price in real time.</p></article>
+        <article class="card card-pad"><div class="ico">👥</div><h3>Customer Management</h3><p>Each phone number is one customer — no duplicates.</p></article>
+        <article class="card card-pad"><div class="ico">💸</div><h3>Expense Tracking</h3><p>Log purchases and overheads as they happen.</p></article>
+        <article class="card card-pad"><div class="ico">🧾</div><h3>Transaction Records</h3><p>A complete, searchable history of every sale.</p></article>
+        <article class="card card-pad"><div class="ico">🖨️</div><h3>Receipt Generation</h3><p>Clean, printable receipts with your branding.</p></article>
+        <article class="card card-pad"><div class="ico">📊</div><h3>Reports &amp; Analytics</h3><p>Revenue, profit and top items at a glance.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="pad why" id="about">
+    <div class="wrap why-grid">
+      <div>
+        <h2>Why choose Bizinflow?</h2>
+        <p class="lead">Built to make running your business feel effortless.</p>
+        <ul class="checks">
+          <li><span class="tick">✓</span> Easy business management</li>
+          <li><span class="tick">✓</span> Secure and reliable platform</li>
+          <li><span class="tick">✓</span> Better business organisation</li>
+          <li><span class="tick">✓</span> Business performance insights</li>
+          <li><span class="tick">✓</span> Improved operational efficiency</li>
+        </ul>
+      </div>
+      <div class="why-cards">
+        <div class="mini card card-pad"><small>Sale</small><b>SLS0043</b><span>Bulk order, 10% off</span></div>
+        <div class="mini card card-pad"><small>Customer</small><b>CUS0017</b><span>Found by phone number</span></div>
+        <div class="mini card card-pad"><small>Receipt</small><b>REC0043</b><span>Printed &amp; saved</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pad pricing" id="pricing">
+    <div class="wrap">
+      <div class="head center">
+        <h2>Simple pricing for every business</h2>
+        <p>Start with the module you need, upgrade any time.</p>
+      </div>
+      <div class="grid price-grid">
+        <div class="card card-pad price"><h3>Sales</h3><div class="amount">₦0<span>/mo</span></div><p>Sales, products, inventory, receipts.</p><a class="btn btn-ghost btn-block" href="signup.html?v=sales">Choose Sales</a></div>
+        <div class="card card-pad price featured"><span class="badge teal">Recommended</span><h3>Complete Suite</h3><div class="amount">₦0<span>/mo</span></div><p>Sales + Services in one unified workspace.</p><a class="btn btn-primary btn-block" href="signup.html?v=both">Choose Suite</a></div>
+        <div class="card card-pad price"><h3>Services</h3><div class="amount">₦0<span>/mo</span></div><p>Services, customers, expenses, history.</p><a class="btn btn-ghost btn-block" href="signup.html?v=svc">Choose Services</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="pad cta">
+    <div class="wrap cta-box">
+      <h2>Your Business. Our Priority.</h2>
+      <p>Join businesses running smarter with Bizinflow.</p>
+      <a class="btn btn-primary" href="signup.html">Start Your Journey</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="pad faq" id="faq">
+    <div class="wrap">
+      <div class="head center"><h2>Frequently asked questions</h2></div>
+      <div class="faq-list">
+        <details class="card card-pad"><summary>Do I need to install anything?</summary><p>No. Bizinflow runs in your browser on any phone, tablet or computer.</p></details>
+        <details class="card card-pad"><summary>Can I switch plans later?</summary><p>Yes — you can move between Sales, Services and the Complete Suite.</p></details>
+        <details class="card card-pad"><summary>Is my data private?</summary><p>Each business has its own workspace; data is never shared between businesses.</p></details>
+        <details class="card card-pad"><summary>How do I get support?</summary><p>Reach us from the Contact section or the in-app Help &amp; Support.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot" id="contact">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#i-logo"/></svg><span>Bizinflow</span></a>
+      <p>One seamless place to manage sales, services, customers and expenses.</p>
+    </div>
+    <div><h4>Company</h4><a href="#about">About</a><a href="#features">Features</a><a href="#contact">Contact</a></div>
+    <div><h4>Product</h4><a href="signup.html?v=sales">Sales</a><a href="signup.html?v=svc">Services</a><a href="signup.html?v=both">Complete Suite</a></div>
+    <div><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+  </div>
+  <div class="wrap foot-base">
+    <span>© <span id="yr"></span> Bizinflow. All rights reserved.</span>
+    <div class="social"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">ig</a><a href="#" aria-label="X">x</a></div>
   </div>
 </footer>
 
-<dialog id="signin" aria-labelledby="signinTitle">
-  <div class="dlg">
-    <button class="x" type="button" id="closeSignin" aria-label="Close">&times;</button>
-    <h2 id="signinTitle">Sign in</h2>
-    <p class="sub">Enter your business PIN to continue.</p>
-    <div class="pinrow">
-      <input id="pin" type="password" placeholder="PIN" autocapitalize="characters" autocomplete="off" aria-label="Business PIN">
-      <button type="button" class="eye" id="eye">Show</button>
-    </div>
-    <div id="err" role="alert"></div>
-    <button type="button" class="btn btn-teal go" id="go">Sign in</button>
-    <a id="open" class="btn btn-white" href="#" target="_top">Tap to continue</a>
-    <p class="note">New business? Ask for your PIN to get set up.</p>
-  </div>
-</dialog>
-
-<!-- Onboarding: login / signup / password reset -->
-<dialog id="onboard" aria-labelledby="onboardTitle">
-  <div class="dlg">
-    <button class="x" type="button" id="closeOnboard" aria-label="Close">&times;</button>
-
-    <!-- Log in -->
-    <div class="ob-view" data-view="login">
-      <h2 id="onboardTitle">Log in</h2>
-      <p class="sub">Welcome back. Enter your email and password.</p>
-      <input id="loginEmail" type="email" placeholder="Business email" autocomplete="email" aria-label="Email">
-      <div class="pinrow">
-        <input id="loginPassword" type="password" placeholder="Password" autocomplete="current-password" aria-label="Password">
-        <button type="button" class="eye" data-toggle="loginPassword">Show</button>
-      </div>
-      <div class="ob-msg" id="loginMsg" role="alert"></div>
-      <button type="button" class="btn btn-teal go" id="doLogin">Log in</button>
-      <p class="note"><a href="#" data-goto="signup">Create an account</a> &middot; <a href="#" data-goto="reset">Forgot password?</a></p>
-    </div>
-
-    <!-- Sign up -->
-    <div class="ob-view" data-view="signup" hidden>
-      <h2>Create your workspace</h2>
-      <p class="sub">Set up your business in a minute.</p>
-      <input id="suName" type="text" placeholder="Business name" autocomplete="organization" aria-label="Business name">
-      <input id="suEmail" type="email" placeholder="Business email" autocomplete="email" aria-label="Business email">
-      <div class="pinrow">
-        <input id="suPassword" type="password" placeholder="Password (min. 8 characters)" autocomplete="new-password" aria-label="Password">
-        <button type="button" class="eye" data-toggle="suPassword">Show</button>
-      </div>
-      <label class="ob-label" for="suVersion">Application version</label>
-      <select id="suVersion" aria-label="Application version">
-        <option value="SALES">Sales Management</option>
-        <option value="SVC">Service Management</option>
-        <option value="BOTH">Complete Business Suite (Sales + Services)</option>
-      </select>
-      <div class="ob-msg" id="signupMsg" role="alert"></div>
-      <button type="button" class="btn btn-teal go" id="doSignup">Create account</button>
-      <p class="note">Already have an account? <a href="#" data-goto="login">Log in</a></p>
-    </div>
-
-    <!-- Forgot password -->
-    <div class="ob-view" data-view="reset" hidden>
-      <h2>Reset password</h2>
-      <p class="sub">We will email you a 6-digit code.</p>
-      <input id="rsEmail" type="email" placeholder="Business email" autocomplete="email" aria-label="Email">
-      <div class="ob-msg" id="resetMsg" role="alert"></div>
-      <button type="button" class="btn btn-white go" id="doResetRequest">Send code</button>
-      <div id="resetConfirm" hidden>
-        <input id="rsOtp" type="text" inputmode="numeric" placeholder="6-digit code" aria-label="Reset code">
-        <div class="pinrow">
-          <input id="rsPassword" type="password" placeholder="New password (min. 8)" autocomplete="new-password" aria-label="New password">
-          <button type="button" class="eye" data-toggle="rsPassword">Show</button>
-        </div>
-        <button type="button" class="btn btn-teal go" id="doResetConfirm">Set new password</button>
-      </div>
-      <p class="note"><a href="#" data-goto="login">Back to log in</a></p>
-    </div>
-
-    <!-- Success / verify notice -->
-    <div class="ob-view" data-view="notice" hidden>
-      <h2 id="noticeTitle">Done</h2>
-      <p class="sub" id="noticeText"></p>
-      <button type="button" class="btn btn-teal go" data-goto="login">Continue to log in</button>
-    </div>
-  </div>
-</dialog>
-
 <script src="js/config.js"></script>
-<script src="js/gas-shim.js"></script>
-<script src="js/onboard.js"></script>
-<script src="js/home.js"></script>
+<script src="js/pages/landing.js"></script>
 </body>
 </html>

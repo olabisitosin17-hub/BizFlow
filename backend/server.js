@@ -108,6 +108,11 @@ app.post('/api/call', callLimiter, async (req, res) => {
     if (!sess) return res.status(401).json({ ok: false, error: 'Session expired. Please log in again.' });
     const body = req.body || {};
     const app = String(body.app || '').toLowerCase();
+    // getDashboard is cross-app: it aggregates whatever apps the business has.
+    if (body.fn === 'getDashboard') {
+      const result = await core.call({ code: sess.code, app, fn: 'getDashboard', args: body.args });
+      return res.json({ ok: true, result });
+    }
     if (!app || !sess.apps.includes(app)) {
       return res.status(403).json({ ok: false, error: 'Your account does not include this app.' });
     }

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Workspace — Bizinflow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="app-body">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#2F4156"/><path d="M6 18c4-6 7 6 11 0s7 6 11 0" fill="none" stroke="#C8D9E6" stroke-width="3" stroke-linecap="round"/></symbol></svg>
+
+<!-- Desktop sidebar -->
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/app.html"><svg viewBox="0 0 32 32" style="width:30px;height:30px" aria-hidden="true"><use href="#i-logo"/></svg><span>Bizinflow</span></a>
+  <nav class="side-nav" id="sideNav">
+    <button class="snav active" data-tab="home"><span class="snav-ico">⌂</span><span>Home</span></button>
+    <button class="snav" data-tab="sales"><span class="snav-ico">🛒</span><span>Sales</span></button>
+    <button class="snav" data-tab="records"><span class="snav-ico">🗂️</span><span>Records</span></button>
+    <button class="snav" data-tab="profile"><span class="snav-ico">⚙️</span><span>Profile</span></button>
+    <button class="snav snav-quick" data-tab="quick"><span class="snav-ico">＋</span><span>Quick Actions</span></button>
+  </nav>
+  <div class="side-foot">
+    <div class="side-biz" id="sideBiz">Business</div>
+    <button class="btn btn-ghost btn-sm btn-block" id="logoutSide">Log out</button>
+  </div>
+</aside>
+
+<!-- Top bar -->
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="row">
+      <span class="topbar-title" id="tabTitle">Home</span>
+    </div>
+    <div class="row" style="gap:10px">
+      <span class="badge" id="versionBadge">Loading…</span>
+      <div class="avatar" id="avatar">B</div>
+    </div>
+  </div>
+</header>
+
+<main class="app-main">
+  <!-- HOME -->
+  <section class="tab-panel" id="tab-home">
+    <div class="dash-head">
+      <div>
+        <h1 id="bizHello">Welcome</h1>
+        <p class="muted" id="dashSub">Here's how your business is doing.</p>
+      </div>
+      <div class="filters">
+        <select class="input input-sm" id="fDate">
+          <option value="today">Today</option>
+          <option value="yesterday">Yesterday</option>
+          <option value="week">This Week</option>
+          <option value="month" selected>This Month</option>
+          <option value="year">This Year</option>
+          <option value="custom">Custom…</option>
+        </select>
+        <span class="custom-range hidden" id="customRange">
+          <input class="input input-sm" type="date" id="fFrom"><span class="muted">to</span><input class="input input-sm" type="date" id="fTo">
+          <button class="btn btn-primary btn-sm" id="fApply">Apply</button>
+        </span>
+      </div>
+    </div>
+
+    <div class="kpi-grid" id="kpiGrid"><!-- cards injected --></div>
+
+    <div class="dash-grid">
+      <div class="card card-pad chart-card">
+        <div class="card-title"><h3>Sales performance</h3><span class="badge teal" id="chartRange">This Month</span></div>
+        <div class="chart-wrap"><canvas id="salesChart" height="220"></canvas><div class="chart-empty hidden" id="chartEmpty">No sales in this period yet.</div></div>
+      </div>
+      <div class="card card-pad chart-card">
+        <div class="card-title"><h3>Expense breakdown</h3></div>
+        <div class="chart-wrap"><canvas id="expenseChart" height="220"></canvas><div class="chart-empty hidden" id="expEmpty">No expenses in this period yet.</div></div>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <div class="card-title"><h3>Recent sales</h3><button class="btn btn-ghost btn-sm" data-goto="sales">View all</button></div>
+      <div class="recent-list" id="recentList"><p class="muted">No sales yet.</p></div>
+    </div>
+  </section>
+
+  <!-- SALES -->
+  <section class="tab-panel hidden" id="tab-sales">
+    <div class="dash-head"><div><h1>Sales</h1><p class="muted">Record and manage sales transactions.</p></div>
+      <button class="btn btn-primary" id="newSaleBtn">＋ New Sale</button></div>
+
+    <div class="card card-pad" id="newSaleCard" style="display:none">
+      <div class="card-title"><h3>New sale</h3><button class="btn btn-ghost btn-sm" id="closeNewSale">Close</button></div>
+      <div class="ns-grid">
+        <div class="field"><label>Customer</label>
+          <select class="input" id="nsCustomer"><option value="">Walk-in / no customer</option></select>
+        </div>
+        <div class="field"><label>Add item (product / service)</label>
+          <select class="input" id="nsItem"><option value="">Select item…</option></select>
+        </div>
+        <div class="field"><label>Quantity</label><input class="input" id="nsQty" type="number" min="1" value="1"></div>
+        <div class="field"><label>&nbsp;</label><button class="btn btn-soft btn-block" id="nsAddItem">Add to sale</button></div>
+      </div>
+      <div class="cart" id="nsCart"></div>
+      <div class="ns-totals">
+        <div class="field" style="max-width:180px"><label>Discount (%)</label><input class="input" id="nsDiscount" type="number" min="0" max="100" value="0"></div>
+        <div class="tot-lines">
+          <div><span>Subtotal</span><b id="nsSubtotal">₦0</b></div>
+          <div><span>Total</span><b id="nsTotal">₦0</b></div>
+        </div>
+      </div>
+      <div class="field"><label>Payment method</label>
+        <select class="input" id="nsPayment"><option>Cash</option><option>Transfer</option><option>POS</option><option>Other</option></select>
+      </div>
+      <div class="error-text" id="nsErr"></div>
+      <button class="btn btn-primary btn-block" id="nsSave">Complete sale</button>
+    </div>
+
+    <div class="card card-pad">
+      <div class="card-title"><h3>Sales history</h3>
+        <div class="row"><input class="input input-sm" id="histSearch" placeholder="Search customer / ref" style="width:200px">
+        <input class="input input-sm" id="histFrom" type="date"></div>
+      </div>
+      <div class="table-wrap"><table class="tbl" id="histTable"><thead><tr><th>Ref</th><th>Customer</th><th>Date</th><th class="right">Amount</th><th></th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- RECORDS -->
+  <section class="tab-panel hidden" id="tab-records">
+    <div class="dash-head"><div><h1>Records</h1><p class="muted">Your complete business history.</p></div></div>
+    <div class="seg" id="recSeg">
+      <button class="seg-btn active" data-rec="sales">Sales</button>
+      <button class="seg-btn" data-rec="customers">Customers</button>
+      <button class="seg-btn" data-rec="products">Products</button>
+      <button class="seg-btn" data-rec="services">Services</button>
+      <button class="seg-btn" data-rec="expenses">Expenses</button>
+    </div>
+    <div class="card card-pad">
+      <div class="row between" style="margin-bottom:12px"><input class="input input-sm" id="recSearch" placeholder="Search…" style="max-width:280px"></div>
+      <div class="table-wrap"><table class="tbl" id="recTable"><thead></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section class="tab-panel hidden" id="tab-profile">
+    <div class="dash-head"><div><h1>Profile &amp; Settings</h1><p class="muted">Manage your business and account.</p></div></div>
+    <div class="profile-grid">
+      <div class="card card-pad">
+        <div class="card-title"><h3>Business information</h3></div>
+        <div class="field"><label>Business name</label><input class="input" id="pName"></div>
+        <div class="field-row">
+          <div class="field"><label>Phone</label><input class="input" id="pPhone"></div>
+          <div class="field"><label>Currency</label><input class="input" id="pCurrency" placeholder="₦"></div>
+        </div>
+        <div class="field"><label>Address</label><input class="input" id="pAddress"></div>
+        <div class="field"><label>Receipt footer</label><input class="input" id="pFooter"></div>
+        <div class="error-text" id="pMsg"></div>
+        <button class="btn btn-primary" id="pSave">Save changes</button>
+      </div>
+      <div class="card card-pad">
+        <div class="card-title"><h3>Account</h3></div>
+        <div class="field"><label>Email</label><input class="input" id="pEmail" disabled></div>
+        <div class="field"><label>Workspace code</label><input class="input" id="pCode" disabled></div>
+        <div class="field"><label>Plan</label><input class="input" id="pPlan" disabled></div>
+        <hr class="hr">
+        <button class="btn btn-ghost btn-block" id="pLogout">Log out</button>
+        <p class="fs-sm muted" style="margin-top:14px">Need help? <a href="#">Help &amp; Support</a> · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Mobile bottom nav -->
+<nav class="bottomnav" id="bottomNav">
+  <button class="bn active" data-tab="home"><span>⌂</span><small>Home</small></button>
+  <button class="bn" data-tab="sales"><span>🛒</span><small>Sales</small></button>
+  <button class="bn bn-quick" data-tab="quick"><span>＋</span></button>
+  <button class="bn" data-tab="records"><span>🗂️</span><small>Records</small></button>
+  <button class="bn" data-tab="profile"><span>⚙️</span><small>Profile</small></button>
+</nav>
+
+<!-- Quick actions sheet -->
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+<section class="sheet" id="quickSheet" aria-hidden="true">
+  <div class="sheet-head"><h3 id="quickTitle">Quick actions</h3><button class="btn btn-icon btn-ghost" id="closeQuick" aria-label="Close">✕</button></div>
+  <div class="sheet-body" id="quickBody"><!-- injected --></div>
+</section>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app/shell.js"></script>
+<script src="js/app/home.js"></script>
+<script src="js/app/sales.js"></script>
+<script src="js/app/quick.js"></script>
+<script src="js/app/records.js"></script>
+<script src="js/app/profile.js"></script>
+</body>
+</html>
