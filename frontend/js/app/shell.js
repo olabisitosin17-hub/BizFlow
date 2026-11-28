@@ -17,9 +17,9 @@
     });
     var t = document.getElementById('tabTitle'); if (t) t.textContent = TITLES[tab] || '';
     location.hash = tab === 'home' ? '' : tab;
-    if (tab === 'quick') { openQuick(); return; }
     if (tab === 'home' && window.BZHome) window.BZHome.reload();
     if (tab === 'sales' && window.BZSales) window.BZSales.reload();
+    if (tab === 'quick' && window.BZQuick) window.BZQuick.reload();
     if (tab === 'records' && window.BZRecords) window.BZRecords.reload();
     if (tab === 'profile' && window.BZProfile) window.BZProfile.reload();
   }
@@ -46,6 +46,11 @@
   // Hide modules the business doesn't have
   document.querySelectorAll('[data-rec]').forEach(function (b) {
     var m = b.getAttribute('data-rec');
+    if ((m === 'products') && !has('sales')) b.classList.add('hidden');
+    if ((m === 'services') && !has('services')) b.classList.add('hidden');
+  });
+  document.querySelectorAll('[data-qk]').forEach(function (b) {
+    var m = b.getAttribute('data-qk');
     if ((m === 'products') && !has('sales')) b.classList.add('hidden');
     if ((m === 'services') && !has('services')) b.classList.add('hidden');
   });
